@@ -1,0 +1,24 @@
+# DomainHunter Pro Configuration
+api:
+  chaos: "your-chaos-key"
+  securitytrails: "your-securitytrails-key"
+  shodan: "your-shodan-key"
+  virustotal: "your-virustotal-key"
+
+cloud:
+  aws: true
+  azure: false
+  gcp: true
+
+engine:
+  threads: 20
+  rate_limit: 10
+  monitor: false
+  historical: true
+  permutations: true
+  cert_transparency: true
+
+notifications:
+  slack: "https://hooks.slack.com/..."
+  discord: "https://discord.com/api/webhooks/..."
+  telegram: "bot123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"

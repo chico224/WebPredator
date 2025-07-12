@@ -1,0 +1,80 @@
+[application]
+version = "4.2.0"
+release = "2024-06"
+name = "DomainHunter Pro"
+description = "Advanced subdomain discovery tool"
+
+[logging]
+level = "INFO"
+file = "logs/domainhunter.log"
+format = "json"
+console = true
+max_size = "10MB"
+retention = "30 days"
+
+[scanner]
+threads = 5
+timeout = 10
+max_warnings = 100
+max_errors = 20
+user_agent = "Mozilla/5.0 (compatible; DomainHunter/4.2; +https://domainhunter.io)"
+
+[reporting]
+format = "json"
+output_dir = "reports"
+webhook_url = ""
+webhook_format = "json"
+
+[authentication]
+enabled = true
+basic_auth = false
+cookies_file = ""
+session_timeout = "30 minutes"
+
+[plugins]
+enabled = true
+directory = "plugins"
+auto_load = true
+
+[update]
+enabled = true
+check_interval = "24 hours"
+auto_update = true
+download_dir = "updates"
+
+[directories]
+plugins = "plugins"
+database = "database"
+templates = "templates"
+exec = "exec"
+reports = "reports"
+logs = "logs"
+
+[cloud]
+providers = ["aws", "azure", "gcp"]
+metadata_endpoints = {
+    aws = "http://169.254.169.254/latest/meta-data",
+    azure = "http://169.254.169.254/metadata/instance",
+    gcp = "http://metadata.google.internal/computeMetadata/v1"
+}
+
+[threat_intel]
+feeds = [
+    "https://api.domainhunter.io/v1/threats/cve",
+    "https://api.domainhunter.io/v1/threats/owasp",
+    "https://api.domainhunter.io/v1/threats/latest"
+]
+refresh_interval = "1 hour"
+cache_size = 1000
+cache_ttl = "24 hours"
+
+[reporting.formats]
+json = true
+csv = true
+sarif = true
+
+[reporting.webhook]
+enabled = true
+timeout = "10 seconds"
+retry_count = 3
+retry_delay = "5 seconds"

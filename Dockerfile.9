@@ -1,0 +1,42 @@
+FROM golang:1.21-alpine as builder
+
+WORKDIR /app
+
+# Copy project files
+COPY go.mod go.sum .
+COPY . .
+
+# Build the application
+RUN CGO_ENABLED=0 GOOS=linux go build -o webvulnscanner .
+
+# -----------------------------
+# Stage 2: runtime
+# -----------------------------
+FROM alpine:3.19
+
+WORKDIR /app
+
+# Copy the binary from builder
+COPY --from=builder /app/webvulnscanner .
+
+# Copy configuration files
+COPY 9ème partie de mon tool.go.toml .
+
+# Create directories
+RUN mkdir -p plugins database templates exec reports logs
+
+# Set permissions
+RUN chmod +x webvulnscanner
+
+# Default execution
+ENTRYPOINT ["./webvulnscanner"]
+
+# Metadata
+LABEL org.opencontainers.image.title="WebVulnScanner Pro"
+LABEL org.opencontainers.image.version="4.2.0"
+LABEL org.opencontainers.image.description="Advanced web vulnerability scanner"
+LABEL org.opencontainers.image.authors="Your Name <you@example.com>"
+LABEL org.opencontainers.image.licenses="Commercial"
+
+# Expose ports
+EXPOSE 8080 8443
