@@ -1,0 +1,107 @@
+[application]
+version = "4.2.0"
+release = "2024-06"
+name = "WebVulnScanner Pro"
+description = "Advanced web vulnerability scanner"
+
+[logging]
+level = "INFO"
+file = "logs/webvulnscanner.log"
+format = "json"
+console = true
+max_size = "10MB"
+retention = "30 days"
+
+[scanner]
+threads = 5
+timeout = 10
+max_warnings = 100
+max_errors = 20
+user_agent = "Mozilla/5.0 (compatible; WebVulnScanner/4.2; +https://webvulnscanner.io)"
+
+[reporting]
+format = "json"
+output_dir = "reports"
+webhook_url = ""
+webhook_format = "json"
+
+[authentication]
+enabled = true
+basic_auth = false
+cookies_file = ""
+session_timeout = "30 minutes"
+
+[plugins]
+enabled = true
+directory = "plugins"
+auto_load = true
+
+[update]
+enabled = true
+check_interval = "24 hours"
+auto_update = true
+download_dir = "updates"
+
+[directories]
+plugins = "plugins"
+database = "database"
+templates = "templates"
+exec = "exec"
+reports = "reports"
+logs = "logs"
+
+[cloud]
+providers = ["aws", "azure", "gcp"]
+metadata_endpoints = {
+    aws = "http://169.254.169.254/latest/meta-data",
+    azure = "http://169.254.169.254/metadata/instance",
+    gcp = "http://metadata.google.internal/computeMetadata/v1"
+}
+
+[threat_intel]
+feeds = [
+    "https://api.webvulnscanner.io/v1/threats/cve",
+    "https://api.webvulnscanner.io/v1/threats/owasp",
+    "https://api.webvulnscanner.io/v1/threats/latest"
+]
+refresh_interval = "1 hour"
+cache_size = 1000
+cache_ttl = "24 hours"
+
+[reporting.formats]
+json = true
+csv = true
+sarif = true
+
+[reporting.webhook]
+enabled = true
+timeout = "10 seconds"
+retry_count = 3
+retry_delay = "5 seconds"
+
+[api_keys]
+# Example API keys (replace with actual values)
+shodan = ""
+virustotal = ""
+passivetotal = ""
+
+[aws]
+access_key = ""
+secret_key = ""
+region = "us-east-1"
+
+[azure]
+client_id = ""
+client_secret = ""
+tenant_id = ""
+subscription_id = ""
+
+[gcp]
+project_id = ""
+credentials_file = ""
+
+[ml]
+enabled = true
+model_path = "models/"
+update_interval = "1 hour"
+confidence_threshold = 0.85

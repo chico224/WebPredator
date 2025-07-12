@@ -1,0 +1,26 @@
+[project]
+name = "webpredator-filehunter"
+version = "3.1.0"
+description = "Advanced File Inclusion Scanner (part of WebPredator suite)"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "Your Name", email = "you@example.com"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourorg/webpredator"
+
+[project.scripts]
+file-hunter = "4ème partie de mon tool:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

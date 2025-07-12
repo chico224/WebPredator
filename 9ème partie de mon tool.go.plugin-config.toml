@@ -1,0 +1,73 @@
+[plugins]
+# Configuration globale du système de plugins
+directory = "plugins"
+auto_load = true
+reload_interval = "5 minutes"
+
+[plugins.types]
+# Types de plugins supportés
+scanner = true
+reporter = true
+authenticator = true
+integrator = true
+
+[plugins.scanner]
+# Configuration des plugins de scan
+enabled = true
+max_concurrent = 5
+timeout = "30 seconds"
+retry_count = 3
+retry_delay = "5 seconds"
+
+[plugins.reporter]
+# Configuration des plugins de rapport
+enabled = true
+formats = ["json", "csv", "sarif"]
+webhook_enabled = true
+webhook_timeout = "10 seconds"
+
+[plugins.authenticator]
+# Configuration des plugins d'authentification
+enabled = true
+session_timeout = "30 minutes"
+max_retries = 3
+
+[plugins.integrator]
+# Configuration des plugins d'intégration
+enabled = true
+cloud_providers = ["aws", "azure", "gcp"]
+api_timeout = "10 seconds"
+
+[plugins.discovery]
+# Configuration de la découverte de plugins
+enabled = true
+registry_url = "https://plugins.webvulnscanner.io"
+check_interval = "1 hour"
+
+[plugins.security]
+# Configuration de la sécurité des plugins
+enabled = true
+verify_signatures = true
+allowed_origins = ["localhost", "webvulnscanner.io"]
+max_size = "10MB"
+
+[plugins.logging]
+# Configuration du logging des plugins
+enabled = true
+level = "INFO"
+file = "logs/plugins.log"
+max_size = "5MB"
+retention = "7 days"
+
+[plugins.cache]
+# Configuration du cache des plugins
+enabled = true
+max_size = "100MB"
+ttl = "24 hours"
+
+[plugins.update]
+# Configuration des mises à jour des plugins
+enabled = true
+check_interval = "24 hours"
+background = true
+max_parallel = 3
